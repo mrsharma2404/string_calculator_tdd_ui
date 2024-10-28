@@ -2,7 +2,8 @@ function StringCalculator(input: string): number {
   let sum: number = 0;
   const negatives: number[] = [];
 
-  input.split(/[,|\n]/).forEach((num) => {
+  const [regex, filteredInput] = extractDelimiter(input);
+  filteredInput.split(regex).forEach((num) => {
     const number = Number(num);
     if (number < 0) {
       negatives.push(number);
@@ -15,5 +16,16 @@ function StringCalculator(input: string): number {
     throw new Error(`negative numbers not allowed: ${negatives.join(", ")}`);
   }
   return sum;
+}
+
+function extractDelimiter(input: string): [RegExp, string] {
+  let regex = /[,\n]/; // Default delimiters are comma and newline
+  // Check for custom delimiter
+  if (input.startsWith("//")) {
+    const delimiterLine = input.substring(2, input.indexOf("\n"));
+    regex = new RegExp(delimiterLine); // Create a regex for the string delimiter
+    input = input.substring(input.indexOf("\n") + 1); // Get the rest of the input after the delimiter line
+  }
+  return [regex, input];
 }
 export default StringCalculator;
