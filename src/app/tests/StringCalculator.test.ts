@@ -11,6 +11,7 @@ test("should return 0 if empty string", () => {
 test("should return 0 if only blankspace is present", () => {
   expect(StringCalculator("  ")).toBe(0);
 });
+
 test("should return 0 if comma with blankspace is present", () => {
   expect(StringCalculator("  ,  ")).toBe(0);
 });
@@ -25,9 +26,7 @@ test("should throw an error for negative numbers", () => {
   );
 });
 
-test("should handle custom delimiter", () => {
+test("should handle custom delimiters", () => {
   expect(StringCalculator("//;\n1;2")).toBe(3);
-});
-test("should handle custom delimiter", () => {
   expect(StringCalculator("//-\n1-2-3")).toBe(6);
 });
