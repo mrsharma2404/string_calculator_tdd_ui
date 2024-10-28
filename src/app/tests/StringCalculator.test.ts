@@ -14,3 +14,7 @@ test("should return 0 if only blankspace is present", () => {
 test("should return 0 if comma with blankspace is present", () => {
   expect(StringCalculator("  ,  ")).toBe(0);
 });
+
+test("should handle newline characters", () => {
+  expect(StringCalculator("1\n2,3")).toBe(6);
+});
